@@ -1,7 +1,5 @@
-import os
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
-from moviepy.video.io.VideoFileClip import VideoFileClip
 
 def start(update: Update, context: CallbackContext):
     update.message.reply_text('Send me a video to generate a 10-second sample.')
