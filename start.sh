@@ -1,7 +1,2 @@
-mkdir telegram-bot
-
-mv bot.py requirements.txt start.sh render.yaml telegram-bot/
-
-cd telegram-bot
-
+#!/bin/bash
 python bot.py
