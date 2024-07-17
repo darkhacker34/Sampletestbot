@@ -1,6 +1,9 @@
 services:
-- type: web
-  name: telegram-bot
-  env: python
-  buildCommand: ""
-  startCommand: "python bot.py"
+  - type: web
+    name: samplevideobot
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python bot.py"
+    envVars:
+      - key: PORT
+        value: "5000"
