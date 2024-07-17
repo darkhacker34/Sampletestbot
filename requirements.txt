@@ -1,4 +1,2 @@
-pyrogram
+python-telegram-bot
 moviepy
-ffmpeg-python
-TgCrypto
