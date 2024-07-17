@@ -1,11 +1,6 @@
-#!/bin/bash
+mkdir telegram-bot
 
-# Create downloads directory if it doesn't exist
-mkdir -p downloads
+cd telegram-bot
 
-pip install --upgrade pip 
-# Install required Python packages
-pip install pyrogram moviepy
-
-# Run the Python bot
-python bot.py
+echo 'python bot.py' > start.sh
+chmod +x start.sh
