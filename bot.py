@@ -1,38 +1,34 @@
+import subprocess
 from pyrogram import Client, filters
-from moviepy.video.io.VideoFileClip import VideoFileClip
-import os
-import random
-import tempfile
-from config import Config
+from moviepy.editor import VideoFileClip
 
-app = Client("sample_video_bot", api_id=Config.API_ID, api_hash=Config.API_HASH, bot_token=Config.BOT_TOKEN)
-
-@app.on_message(filters.command("start"))
-async def start(client, message):
-    await message.reply_text("Send me a video to generate a random sample from it.")
+app = Client("my_bot")
 
 @app.on_message(filters.video)
 async def handle_video(client, message):
-    video = message.video
-    video_path = await message.download()
-    print("Downloading...")
-    # Process video to generate a random sample
-    with VideoFileClip(video_path) as video_clip:
-        sample_duration = 10  # Duration of the sample in seconds
-        video_duration = video_clip.duration
-        start_time = random.uniform(0, video_duration - sample_duration)
-        sample_clip = video_clip.subclip(start_time, start_time + sample_duration)
+    video_path = "downloads/original_video.mp4"
+    output_path = "downloads/sample_video.mp4"
+    fixed_video_path = "downloads/fixed_video.mp4"
 
-        # Create a temporary directory for the output
-        with tempfile.NamedTemporaryFile(suffix=".mp4", delete=False) as tmp_file:
-            sample_path = tmp_file.name
-            sample_clip.write_videofile(sample_path, codec="libx264", audio_codec="aac", ffmpeg_params=["-bufsize", "100M"])
+    # Download the video file
+    await message.download(video_path)
 
-    # Send the sample video back to the user
-    await message.reply_video(sample_path)
+    try:
+        # Re-encode the video to ensure compatibility
+        subprocess.run(
+            ["ffmpeg", "-i", video_path, "-c:v", "libx264", "-c:a", "aac", fixed_video_path],
+            check=True
+        )
 
-    # Clean up
-    os.remove(video_path)
-    os.remove(sample_path)
+        # Create a sample video (e.g., first 10 seconds)
+        with VideoFileClip(fixed_video_path) as video_clip:
+            sample_clip = video_clip.subclip(0, 10)  # Get the first 10 seconds
+            sample_clip.write_videofile(output_path)
 
-app.run()
+        print("Sample video created successfully.")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    app.run()
