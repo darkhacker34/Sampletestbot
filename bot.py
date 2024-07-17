@@ -8,7 +8,7 @@ app = Client(
     "my_bot",
     api_id=29843602,
     api_hash="fc6589fe625b0d1e0ba1ee7d876e8541",
-    bot_token="7213907869:AAEWyjLs492_EiUzbS3vIYkTfpxcbF5bYIU"
+    bot_token="7213907869:AAEWyjLs492_EiUzbS3vIYkTfpxcbF5bYIU",
 )
 
 @app.on_message(filters.video)
