@@ -1,7 +1,7 @@
+import os
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from moviepy.video.io.VideoFileClip import VideoFileClip
-import os
 
 def start(update: Update, context: CallbackContext):
     update.message.reply_text('Send me a video to generate a 10-second sample.')
@@ -12,7 +12,7 @@ def handle_video(update: Update, context: CallbackContext):
 
     # Process video
     clip = VideoFileClip('input_video.mp4')
-    sample_clip = clip.subclip(0, 10)  # Get the first 10 seconds
+    sample_clip = clip.subclip(0, 10)
     sample_clip.write_videofile('sample_video.mp4', codec='libx264', audio_codec='aac')
 
     # Send back the sample video
@@ -23,7 +23,7 @@ def handle_video(update: Update, context: CallbackContext):
     os.remove('sample_video.mp4')
 
 def main():
-    updater = Updater("7213907869:AAFByjyPdeXjsqT-dPdzVvDyV_0q5qWAKrY")  # Replace with your bot token
+    updater = Updater(os.getenv("7213907869:AAFByjyPdeXjsqT-dPdzVvDyV_0q5qWAKrY"))  # Use environment variable
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler("start", start))
