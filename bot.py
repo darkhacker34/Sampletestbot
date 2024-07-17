@@ -2,6 +2,7 @@ from pyrogram import Client, filters
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import os
 import random
+from config import Config
 
 app = Client("sample_video_bot", api_id=Config.API_ID, api_hash=Config.API_HASH, bot_token=Config.BOT_TOKEN)
 
