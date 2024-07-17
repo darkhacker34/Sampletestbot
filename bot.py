@@ -42,4 +42,5 @@ async def handle_video(client, message):
         print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get("PORT", 8080))
+    app.run(port=port)
