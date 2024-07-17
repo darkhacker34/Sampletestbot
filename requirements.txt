@@ -1,2 +1,3 @@
 pyrogram
 moviepy
+ffmpeg-python
