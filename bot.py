@@ -23,7 +23,7 @@ def handle_video(update: Update, context: CallbackContext):
     os.remove('sample_video.mp4')
 
 def main():
-    updater = Updater(os.getenv("TELEGRAM_BOT_TOKEN"))  # Use environment variable
+    updater = Updater(os.getenv("7213907869:AAFByjyPdeXjsqT-dPdzVvDyV_0q5qWAKrY"))  # Use environment variable
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler("start", start))
